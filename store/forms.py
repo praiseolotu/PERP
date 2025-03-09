@@ -10,6 +10,7 @@ class ItemForm(forms.ModelForm):
         model = Item
         fields = [
             'name',
+            'isbn',
             'description',
             'category',
             'quantity',
@@ -19,6 +20,7 @@ class ItemForm(forms.ModelForm):
         ]
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'isbn': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(
                 attrs={
                     'class': 'form-control',

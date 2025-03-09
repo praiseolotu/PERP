@@ -119,7 +119,7 @@ class ItemSearchListView(ProductListView):
             query_list = query.split()
             result = result.filter(
                 reduce(
-                    operator.and_, (Q(name__icontains=q) for q in query_list)
+                    operator.or_, (Q(name__icontains=q) | Q(isbn__icontains=q)for q in query_list)
                 )
             )
         return result

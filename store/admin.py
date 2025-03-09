@@ -18,7 +18,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_display = (
         'name', 'category', 'quantity', 'price', 'expiring_date', 'vendor'
     )
-    search_fields = ('name', 'category__name', 'vendor__name')
+    search_fields = ('isbn', 'name', 'category__name', 'vendor__name')
     list_filter = ('category', 'vendor')
     ordering = ('name',)
 

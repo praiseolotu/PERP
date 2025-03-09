@@ -10,7 +10,7 @@ class ItemTable(tables.Table):
         model = Item
         template_name = "django_tables2/semantic.html"
         fields = (
-            'id', 'name', 'category', 'quantity',
+            'id', 'isbn', 'name', 'category', 'quantity',
             'selling_price', 'expiring_date', 'vendor'
         )
         order_by_field = 'sort'
