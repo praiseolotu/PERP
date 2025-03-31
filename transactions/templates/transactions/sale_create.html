@@ -54,8 +54,8 @@
                                         <th>Name</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
-                                        <th>ISBN</th>
                                         <th>Total</th>
+                                        <th>ISBN</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -93,10 +93,12 @@
                             <label for="tax_percentage" class="form-label">Discount Inclusive (%)</label>
                             <input name="tax_percentage" type="number" class="form-control" id="tax_percentage" aria-label="Tax Inclusive" value="0" required>
                         </div>
+                       
                         <div class="mb-3">
                             <label for="tax_amount" class="form-label">Discount Amount</label>
                             <input name="tax_amount" type="number" class="form-control" id="tax_amount" aria-label="Tax Amount" required>
                         </div>
+                       
                         <div class="mb-3">
                             <label for="grand_total" class="form-label">Grand Total</label>
                             <input name="grand_total" type="number" class="form-control" id="grand_total" aria-label="Grand Total" required>
@@ -173,13 +175,13 @@
 
             // Update the sale subtotal, grand total, and tax amount
             this.products.sub_total = roundTo(sub_total, 2);
-            this.products.tax_amount = roundTo(this.products.sub_total * (tax_percentage / 100), 2);
+            this.products.tax_amount = roundTo(this.products.sub_total * (tax_percentage / 100), 2 );
             this.products.grand_total = roundTo(this.products.sub_total, 2) - this.products.tax_amount;
-            
-
+           
             $('input[name="sub_total"]').val(this.products.sub_total);
             $('input[name="tax_amount"]').val(this.products.tax_amount);
             $('input[name="grand_total"]').val(this.products.grand_total);
+            
         },
         // Adds an item to the sale object
         add_item: function (item) {
@@ -199,8 +201,8 @@
                     {"data": "name"},
                     {"data": "price"},
                     {"data": "quantity"},
-                    {"data": "isbn"},
                     {"data": "total_item"},
+                    {"data": "isbn"},
                     {"data": "id"},
                 ],
                 columnDefs: [
