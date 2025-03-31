@@ -377,7 +377,7 @@ def get_items_ajax_view(request):
             term = request.POST.get("term", "")
             data = []
 
-            items = Item.objects.filter(name__icontains=term)
+            items = Item.objects.filter(isbn__icontains=term)
             for item in items[:10]:
                 data.append(item.to_json())
 

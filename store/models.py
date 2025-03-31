@@ -29,7 +29,7 @@ class Item(models.Model):
     """
     slug = AutoSlugField(unique=True, populate_from='name')
     name = models.CharField(max_length=50)
-    isbn = models.CharField(max_length=13, default='9783161484100')
+    isbn = models.CharField(max_length=13, default='9781108988234')
     description = models.TextField(max_length=256)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)

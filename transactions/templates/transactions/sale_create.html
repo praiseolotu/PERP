@@ -54,6 +54,7 @@
                                         <th>Name</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
+                                        <th>ISBN</th>
                                         <th>Total</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
@@ -89,11 +90,11 @@
                             <input name="sub_total" type="number" class="form-control" id="sub_total" aria-label="Subtotal" required>
                         </div>
                         <div class="mb-3">
-                            <label for="tax_percentage" class="form-label">Tax Inclusive (%)</label>
+                            <label for="tax_percentage" class="form-label">Discount Inclusive (%)</label>
                             <input name="tax_percentage" type="number" class="form-control" id="tax_percentage" aria-label="Tax Inclusive" value="0" required>
                         </div>
                         <div class="mb-3">
-                            <label for="tax_amount" class="form-label">Tax Amount</label>
+                            <label for="tax_amount" class="form-label">Discount Amount</label>
                             <input name="tax_amount" type="number" class="form-control" id="tax_amount" aria-label="Tax Amount" required>
                         </div>
                         <div class="mb-3">
@@ -172,8 +173,9 @@
 
             // Update the sale subtotal, grand total, and tax amount
             this.products.sub_total = roundTo(sub_total, 2);
-            this.products.grand_total = roundTo(this.products.sub_total, 2);
             this.products.tax_amount = roundTo(this.products.sub_total * (tax_percentage / 100), 2);
+            this.products.grand_total = roundTo(this.products.sub_total, 2) - this.products.tax_amount;
+            
 
             $('input[name="sub_total"]').val(this.products.sub_total);
             $('input[name="tax_amount"]').val(this.products.tax_amount);
@@ -197,6 +199,7 @@
                     {"data": "name"},
                     {"data": "price"},
                     {"data": "quantity"},
+                    {"data": "isbn"},
                     {"data": "total_item"},
                     {"data": "id"},
                 ],

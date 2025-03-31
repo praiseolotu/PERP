@@ -1,8 +1,9 @@
-from django.db import models
+from django.db import models, transaction  
 from django_extensions.db.fields import AutoSlugField
-
+import logging
 from store.models import Item
 from accounts.models import Vendor, Customer
+logger = logging.getLogger(__name__)
 
 DELIVERY_CHOICES = [("P", "Pending"), ("S", "Successful")]
 
@@ -129,16 +130,17 @@ class Purchase(models.Model):
     delivery_status = models.CharField(
         choices=DELIVERY_CHOICES,
         max_length=1,
-        default="P",
+        default="P",  # Default to "Pending"
         verbose_name="Delivery Status",
     )
     price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
         default=0.0,
-        verbose_name="Price per item (Ksh)",
+        verbose_name="Price per item (NGN)",
     )
     total_value = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity_updated = models.BooleanField(default=False)  # New field
 
     def save(self, *args, **kwargs):
         """
@@ -146,9 +148,6 @@ class Purchase(models.Model):
         """
         self.total_value = self.price * self.quantity
         super().save(*args, **kwargs)
-        # Update the item quantity
-        self.item.quantity += self.quantity
-        self.item.save()
 
     def __str__(self):
         """
@@ -158,4 +157,3 @@ class Purchase(models.Model):
 
     class Meta:
         ordering = ["order_date"]
-
